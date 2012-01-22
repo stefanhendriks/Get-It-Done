@@ -1,4 +1,4 @@
-package com.fundynamic.webstore.domain;
+package com.fundynamic.getitdone.domain;
 
 public class Book {
 

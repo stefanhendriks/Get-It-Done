@@ -1,4 +1,4 @@
-package com.fundynamic.webstore.controllers;
+package com.fundynamic.getitdone.controllers;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fundynamic.webstore.services.BookService;
+import com.fundynamic.getitdone.services.BookService;
 
 @Controller
 public class BooksController {

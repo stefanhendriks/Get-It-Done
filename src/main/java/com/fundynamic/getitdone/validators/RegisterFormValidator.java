@@ -1,10 +1,10 @@
-package com.fundynamic.webstore.validators;
+package com.fundynamic.getitdone.validators;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.fundynamic.webstore.domain.forms.RegistrationForm;
+import com.fundynamic.getitdone.domain.forms.RegistrationForm;
 
 @Component
 public class RegisterFormValidator implements Validator {

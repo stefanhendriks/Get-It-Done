@@ -1,11 +1,11 @@
-package com.fundynamic.webstore.services;
+package com.fundynamic.getitdone.services;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.fundynamic.webstore.domain.Book;
+import com.fundynamic.getitdone.domain.Book;
 
 @Service
 public class BookServiceStub implements BookService {

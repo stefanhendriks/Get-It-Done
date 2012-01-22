@@ -1,8 +1,8 @@
-package com.fundynamic.webstore.services;
+package com.fundynamic.getitdone.services;
 
 import java.util.List;
 
-import com.fundynamic.webstore.domain.Book;
+import com.fundynamic.getitdone.domain.Book;
 
 public interface BookService {
 

@@ -1,4 +1,4 @@
-package com.fundynamic.webstore.controllers;
+package com.fundynamic.getitdone.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,8 +8,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fundynamic.webstore.domain.forms.RegistrationForm;
-import com.fundynamic.webstore.validators.RegisterFormValidator;
+import com.fundynamic.getitdone.domain.forms.RegistrationForm;
+import com.fundynamic.getitdone.validators.RegisterFormValidator;
 
 @Controller
 public class RegisterController {

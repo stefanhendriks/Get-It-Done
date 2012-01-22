@@ -12,7 +12,7 @@
 			    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
    				">
 
-	<context:component-scan base-package="com.fundynamic.webstore" />
+	<context:component-scan base-package="com.fundynamic.getitdone" />
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />

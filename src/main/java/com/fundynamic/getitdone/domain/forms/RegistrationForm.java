@@ -1,4 +1,4 @@
-package com.fundynamic.webstore.domain.forms;
+package com.fundynamic.getitdone.domain.forms;
 
 public class RegistrationForm {
 
