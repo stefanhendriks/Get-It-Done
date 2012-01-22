@@ -1,0 +1,1 @@
+mvn eclipse:clean eclipse:eclipse sysdeo-tomcat:generate -DcontextDefinition=true -DdownloadSources=true -DdownloadJavadocs=true
