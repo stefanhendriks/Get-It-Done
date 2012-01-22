@@ -3,7 +3,6 @@ package com.fundynamic.getitdone.domain;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.fundynamic.getitdone.TaskTest.Worker;
 import com.fundynamic.getitdone.domain.exceptions.MustAssignToSubTaskException;
 
 public class Task {

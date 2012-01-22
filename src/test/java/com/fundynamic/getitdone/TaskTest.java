@@ -7,6 +7,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 import com.fundynamic.getitdone.domain.Task;
+import com.fundynamic.getitdone.domain.Worker;
 import com.fundynamic.getitdone.domain.exceptions.MustAssignToSubTaskException;
 
 public class TaskTest {
@@ -52,9 +53,4 @@ public class TaskTest {
 		Assert.assertTrue(subTaskFromTask == subTask);
 	}
 	
-	
-	
-	public class Worker {
-		
-	}
 }
