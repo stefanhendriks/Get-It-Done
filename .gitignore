@@ -1,0 +1,8 @@
+
+/.settings
+/work
+/target
+*.iml
+*.classpath
+*.project
+*.tomcatplugin
