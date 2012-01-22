@@ -7,6 +7,7 @@ import com.fundynamic.getitdone.domain.exceptions.MustAssignToSubTaskException;
 
 public class Task {
 
+	private Estimate estimate = new Estimate(1, 5, 3);
 	private Worker worker;
 	private List<Task> subTasks = new LinkedList<Task>();
 	
@@ -43,4 +44,12 @@ public class Task {
 		return subTasks.size() > 0;
 	}
 
+	public Estimate getEstimate() {
+		return estimate;
+	}
+
+	public void setEstimate(Estimate estimate) {
+		this.estimate = estimate;
+	}
+	
 }

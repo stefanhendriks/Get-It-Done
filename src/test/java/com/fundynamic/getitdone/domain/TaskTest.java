@@ -4,6 +4,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.fundynamic.getitdone.domain.Task;
@@ -12,9 +13,15 @@ import com.fundynamic.getitdone.domain.exceptions.MustAssignToSubTaskException;
 
 public class TaskTest {
 
+	private Task task;
+	
+	@Before
+	public void setUp() {
+		task = new Task();
+	}
+	
 	@Test
 	public void mustAssignToWorkerWhenTaskHasNoSubTasks() {
-		Task task = new Task();
 		Worker worker = new Worker();
 		
 		// Act
@@ -26,7 +33,7 @@ public class TaskTest {
 	
 	@Test (expected = MustAssignToSubTaskException.class)
 	public void mustThrowMustAssignToSubTaskExceptionWhenAssigningToTaskWithSubTasks() {
-		Task task = Task.createTestInstanceWithSubTasks();
+		task = Task.createTestInstanceWithSubTasks();
 		
 		// Act
 		task.setAssignedWorker(new Worker());
@@ -34,14 +41,12 @@ public class TaskTest {
 	
 	@Test
 	public void mustReturnTrueWhenTaskHasSubTasks() {
-		Task task = Task.createTestInstanceWithSubTasks();
+		task = Task.createTestInstanceWithSubTasks();
 		Assert.assertTrue(task.hasSubTasks());
 	}
 	
 	@Test
 	public void mustAddSubTask() {
-		Task task = new Task();
-		
 		// Act
 		Task subTask = new Task();
 		task.addSubTask(subTask);
@@ -55,8 +60,6 @@ public class TaskTest {
 
 	@Test
 	public void mustUnAssignWorkerWhenTaskGetsSubTask() {
-		Task task = new Task();
-		
 		Worker worker = new Worker();
 		task.setAssignedWorker(worker);
 		
@@ -71,8 +74,6 @@ public class TaskTest {
 	
 	@Test
 	public void mustAssignWorkerToSubTask() {
-		Task task = new Task();
-
 		Worker worker = new Worker();
 		task.setAssignedWorker(worker);
 		
@@ -84,5 +85,5 @@ public class TaskTest {
 		// Assert
 		Assert.assertTrue(subTask.getAssignedWorker() == worker);
 	}
-	
+
 }

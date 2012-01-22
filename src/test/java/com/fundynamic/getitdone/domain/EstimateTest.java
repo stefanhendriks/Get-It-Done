@@ -10,6 +10,7 @@ public class EstimateTest {
 	private static final int PESSIMISTIC_FIFTEEN = 15;
 	private static final int OPTIMISTIC_FIVE = 5;
 
+	
 	@Test
 	// Example taken from: http://www.techrepublic.com/blog/project-management/use-pert-technique-for-more-accurate-estimates/120
 	public void mustReturnPERTEstimate() {
