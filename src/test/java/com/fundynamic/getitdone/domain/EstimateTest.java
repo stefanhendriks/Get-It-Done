@@ -63,7 +63,18 @@ public class EstimateTest {
 	
 	@Test 
 	public void mustReturnEstimateWithSumOfEstimates() {
+		Estimate estimate = new Estimate(5, 15, 10);
+		Estimate anotherEstimate = new Estimate(10, 30, 20);
 		
+		// Act
+		Estimate combinedEstimate = estimate.add(anotherEstimate);
+		
+		// Assert
+		Assert.assertTrue(combinedEstimate != estimate);
+		Assert.assertTrue(combinedEstimate != anotherEstimate);
+		Assert.assertEquals(15, combinedEstimate.optimistic);
+		Assert.assertEquals(45, combinedEstimate.pessimistic);
+		Assert.assertEquals(30, combinedEstimate.mostLikely);
 	}
 	
 	@Test
@@ -92,6 +103,13 @@ public class EstimateTest {
 			setMostLikely(1);
 		}
 		
+		public Estimate add(Estimate anotherEstimate) {
+			int newOptimistic = this.optimistic + anotherEstimate.getOptimistic();
+			int newPessimistic = this.pessimistic + anotherEstimate.getPessimistic();
+			int newMostLikely = this.mostLikely + anotherEstimate.getMostLikely();
+			return new Estimate(newOptimistic, newPessimistic, newMostLikely);
+		}
+
 		public Estimate(int optimistic, int pessimistic, int mostLikely) {
 			if (optimistic > pessimistic) {
 				throw new IllegalArgumentException("Pessimistic value [" + pessimistic + "] is not allowed to be lower than optimistic value of [" + optimistic + "]");
@@ -109,7 +127,6 @@ public class EstimateTest {
 			return estimate;
 		}
 		
-		// Formula: (O + 4M + P)/6
 		public int getPERTEstimate() {
 			int result = (optimistic) + (4 * mostLikely) + pessimistic;
 			return result / 6;
