@@ -1,4 +1,4 @@
-package com.fundynamic.getitdone;
+package com.fundynamic.getitdone.domain;
 
 import java.util.List;
 
