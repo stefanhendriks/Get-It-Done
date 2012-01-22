@@ -52,5 +52,20 @@ public class TaskTest {
 		Task subTaskFromTask = subTasks.get(0);
 		Assert.assertTrue(subTaskFromTask == subTask);
 	}
-	
+
+	@Test
+	public void mustUnAssignWorkerWhenTaskGetsSubTask() {
+		Task task = new Task();
+		
+		Worker worker = new Worker();
+		task.setAssignedWorker(worker);
+		
+		Task subTask = new Task();
+		
+		// Act
+		task.addSubTask(subTask);
+		
+		// Assert
+		Assert.assertNull(task.getAssignedWorker());
+	}
 }

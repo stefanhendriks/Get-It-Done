@@ -23,6 +23,9 @@ public class Task {
 
 	public void addSubTask(Task subTask) {
 		subTasks.add(subTask);
+		if (worker != null) {
+			worker = null;
+		}
 	}
 
 	public List<Task> getSubTasks() {
