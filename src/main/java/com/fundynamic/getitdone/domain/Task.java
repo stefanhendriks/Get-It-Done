@@ -24,6 +24,7 @@ public class Task {
 	public void addSubTask(Task subTask) {
 		subTasks.add(subTask);
 		if (worker != null) {
+			subTask.setAssignedWorker(worker);
 			worker = null;
 		}
 	}
