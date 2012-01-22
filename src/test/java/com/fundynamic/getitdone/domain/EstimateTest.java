@@ -7,6 +7,9 @@ import org.junit.Test;
 
 public class EstimateTest {
 
+	private static final int PESSIMISTIC_FIFTEEN = 15;
+	private static final int OPTIMISTIC_FIVE = 5;
+
 	@Test
 	// Example taken from: http://www.techrepublic.com/blog/project-management/use-pert-technique-for-more-accurate-estimates/120
 	public void mustReturnPERTEstimate() {
@@ -24,7 +27,7 @@ public class EstimateTest {
 	
 	@Test
 	public void mustCreateEstimateWithAverageValueForMostLikely() {
-		Estimate estimate = Estimate.createWithAverageMostLikely(10, 4);
+		Estimate estimate = Estimate.createWithAverageMostLikely(4, 10);
 		Assert.assertEquals(7, estimate.mostLikely);
 	}
 	
@@ -61,6 +64,15 @@ public class EstimateTest {
 	@Test 
 	public void mustReturnEstimateWithSumOfEstimates() {
 		
+	}
+	
+	@Test
+	public void mustForceMostLikelyToBeInBetween() {
+		Estimate estimate = Estimate.createWithAverageMostLikely(OPTIMISTIC_FIVE, PESSIMISTIC_FIFTEEN);
+		estimate.setMostLikely(4);
+		Assert.assertEquals(OPTIMISTIC_FIVE, estimate.mostLikely);
+		estimate.setMostLikely(16);
+		Assert.assertEquals(PESSIMISTIC_FIFTEEN, estimate.mostLikely);
 	}
 	
 	public static class Estimate {
@@ -112,6 +124,8 @@ public class EstimateTest {
 		}
 
 		public void setMostLikely(int mostLikely) {
+			if (mostLikely < optimistic) mostLikely = optimistic;
+			if (mostLikely > pessimistic) mostLikely = pessimistic;
 			this.mostLikely = mostLikely;
 		}
 
