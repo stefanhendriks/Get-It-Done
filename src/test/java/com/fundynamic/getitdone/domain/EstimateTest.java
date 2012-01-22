@@ -75,6 +75,11 @@ public class EstimateTest {
 		Assert.assertEquals(PESSIMISTIC_FIFTEEN, estimate.mostLikely);
 	}
 	
+	@Test (expected = IllegalArgumentException.class)
+	public void mustThrowIllegalArgumentExceptionWhenPessimisticIsLowerThanOptimistic() {
+		new Estimate(15, 10, 5);
+	}
+	
 	public static class Estimate {
 
 		private int optimistic = 0;
@@ -88,6 +93,9 @@ public class EstimateTest {
 		}
 		
 		public Estimate(int optimistic, int pessimistic, int mostLikely) {
+			if (optimistic > pessimistic) {
+				throw new IllegalArgumentException("Pessimistic value [" + pessimistic + "] is not allowed to be lower than optimistic value of [" + optimistic + "]");
+			}
 			setOptimistic(optimistic);
 			setPessimistic(pessimistic);
 			setMostLikely(mostLikely);
