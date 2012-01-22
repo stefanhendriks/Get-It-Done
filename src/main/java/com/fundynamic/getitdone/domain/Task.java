@@ -10,10 +10,25 @@ public class Task {
 	private Estimate estimate = new Estimate(1, 5, 3);
 	private Worker worker;
 	private List<Task> subTasks = new LinkedList<Task>();
-	
-	public void setAssignedWorker(Worker worker) throws MustAssignToSubTaskException {
+
+	private final String description;
+
+	public Task(String description) {
+		this.description = description;
+	}
+
+	public Task(String description, Estimate estimate) {
+		this(description);
+		if (estimate == null)
+			throw new IllegalArgumentException("Estimate may not be null");
+		this.estimate = estimate;
+	}
+
+	public void setAssignedWorker(Worker worker)
+			throws MustAssignToSubTaskException {
 		if (hasSubTasks()) {
-			throw new MustAssignToSubTaskException("Cannot assign a worker to a task with sub tasks. Assign to the subtasks instead.");
+			throw new MustAssignToSubTaskException(
+					"Cannot assign a worker to a task with sub tasks. Assign to the subtasks instead.");
 		}
 		this.worker = worker;
 	}
@@ -35,8 +50,8 @@ public class Task {
 	}
 
 	public static Task createTestInstanceWithSubTasks() {
-		Task task = new Task();
-		task.addSubTask(new Task());
+		Task task = new Task("Test task");
+		task.addSubTask(new Task("Test sub task"));
 		return task;
 	}
 
@@ -45,11 +60,36 @@ public class Task {
 	}
 
 	public Estimate getEstimate() {
+		if (hasSubTasks()) {
+			return calculateEstimatesFromSubTasks();
+		}
+		return estimate;
+	}
+
+	private Estimate calculateEstimatesFromSubTasks() {
+		Estimate estimate = Estimate.createEmpty();
+		for (Task task : subTasks) {
+			Estimate taskEstimate = task.getEstimate();
+			estimate = estimate.add(taskEstimate);
+		}
 		return estimate;
 	}
 
 	public void setEstimate(Estimate estimate) {
 		this.estimate = estimate;
 	}
-	
+
+	public String toString() {
+		final String TAB = "    ";
+
+		String retValue = "";
+
+		retValue = "Task ( estimate = "
+				+ this.estimate + TAB + "worker = " + this.worker + TAB
+				+ "subTasks = " + this.subTasks + TAB + "description = "
+				+ this.description + TAB + " )";
+
+		return retValue;
+	}
+
 }
