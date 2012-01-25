@@ -62,7 +62,7 @@ public class TasksController {
 	}
 
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "action=Save")
+	@RequestMapping(value = "/save")
 	public String saveNewTask(ModelMap modelMap, HttpServletRequest request) throws ServletException, IOException {
 		Task newTask = new Task(request.getParameter("description"));
 		newTask.setEstimatedHours(getHoursForValue(request.getParameter("estimatedHours")));
