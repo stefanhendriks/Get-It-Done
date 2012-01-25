@@ -96,5 +96,11 @@ public class TaskTest {
 		// Assert
 		Assert.assertEquals(18, estimatedHours);
 	}
+
+	@Test
+	public void mustReturnEstimatedHoursWhenTaskHasNoSubtasks() {
+		Task task = new Task("someTask", 10);
+		org.junit.Assert.assertEquals(10, task.getEstimatedHours());
+	}
 	
 }
