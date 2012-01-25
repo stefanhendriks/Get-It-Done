@@ -20,22 +20,36 @@
 		</tr>
 
 		<c:forEach items="${tasks}" var="task">
-			<tr>
-				<td align="center">${task.id}</td>
-				<td>${task.description}</td>
-				<td align="center">${task.assignedWorker}</td>
-				<td align="center">${task.estimatedHours}</td>
-				<td align="center">${task.burnedHours}</td>
-			</tr>
+			<form action="/tasks/save.htm" method="POST">
+				<tr>
+					<td align="center">${task.id}</td>
+					<td><input type="text" value ="${task.description}" name="description" size="80"></td>
+					<td><input type="text" value ="${task.assignedWorker}" name="assignedWorker" size="25"></td>
+					<td><input type="text" value="${task.estimatedHours}" name="estimatedHours" size="5"></td>
+					<td><input type="text" value="${task.burnedHours}" name="burnedHours" size="5"></td>
+					<td align="right"><input type="submit" name="action" value="Update"></td>
+				</tr>
+			</form>
+			<form action="/tasks/save.htm" method="POST">
+				<tr id="subtaskpanel_${task.id}" style="display: none">
+					<td></td>
+					<td><input type="text" name="description" size="80"></td>
+					<td><input type="text" name="assignedWorker" size="25"></td>
+					<td><input type="text" name="estimatedHours" size="5"></td>
+					<td><input type="text" name="burnedHours" size="5"></td>
+					<td align="right"><input type="submit" name="action" value="Save"></td>
+				</tr>
+			</form>
 		</c:forEach>
+	<tr style="background-color: black;"><td colspan="6"/></tr>
 	<form action="/tasks/save.htm" method="POST">
 		<tr>
-			<td>New</td>
+			<td>New Task</td>
 			<td><input type="text" name="description" size="80"></td>
 			<td><input type="text" name="assignedWorker" size="25"></td>
 			<td><input type="text" name="estimatedHours" size="5"></td>
 			<td><input type="text" name="burnedHours" size="5"></td>
-			<td><input type="submit" name="action" value="Save"></td>
+			<td align="right"><input type="submit" name="action" value="Save"></td>
 		</tr>
 	</form>
 </table>
