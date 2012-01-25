@@ -37,34 +37,47 @@ public class TasksController {
 		return "tasks";
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "action=Save as new")
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "action=Save")
 	public String saveNewTask(ModelMap modelMap, HttpServletRequest request) throws ServletException, IOException {
 		Task newTask = new Task(request.getParameter("description"));
-		String estimatedHours = request.getParameter("estimatedHours");
-		newTask.setEstimatedHours(Integer.parseInt(estimatedHours));
+		newTask.setEstimatedHours(getHoursForValue(request.getParameter("estimatedHours")));
+		newTask.setBurnedHours(getHoursForValue(request.getParameter("burnedHours")));
+		String assignedWorker = request.getParameter("assignedWorker");
+		newTask.setAssignedWorker(assignedWorker);
 		taskRepository.upsertTask(newTask);
 		return getAllTasks(modelMap);
 	}
 
-	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "action=Save as sub-task")
-	public String saveSubTask(ModelMap modelMap, HttpServletRequest request) throws ServletException, IOException {
-		String taskId = request.getParameter("taskId");
-		Long id = Long.parseLong(taskId);
-		Task taskById = taskRepository.getTaskById(id);
-
-		Task newTask = new Task(request.getParameter("description"));
-		String estimatedHours = request.getParameter("estimatedHours");
-		newTask.setEstimatedHours(Integer.parseInt(estimatedHours));
-
-		taskById.addSubTask(newTask);
-
-		taskRepository.upsertTask(taskById);
-
-		return getAllTasks(modelMap);
-	}
+//	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "action=Save as sub-task")
+//	public String saveSubTask(ModelMap modelMap, HttpServletRequest request) throws ServletException, IOException {
+//		String taskId = request.getParameter("taskId");
+//		Long id = Long.parseLong(taskId);
+//		Task taskById = taskRepository.getTaskById(id);
+//
+//		Task newTask = new Task(request.getParameter("description"));
+//		String estimatedHours = request.getParameter("estimatedHours");
+//		newTask.setEstimatedHours(Integer.parseInt(estimatedHours));
+//
+//
+//		taskById.addSubTask(newTask);
+//
+//		taskRepository.upsertTask(taskById);
+//
+//		return getAllTasks(modelMap);
+//	}
 
 	@RequestMapping(value = "/update")
 	public String updateTask(ModelMap modelMap, HttpServletRequest request) throws ServletException, IOException {
 		return getAllTasks(modelMap);
 	}
+
+	private int getHoursForValue(String value) {
+		try {
+			return Integer.parseInt(value);
+		} catch (NumberFormatException e) {
+			return 0;
+		}
+	}
+
 }

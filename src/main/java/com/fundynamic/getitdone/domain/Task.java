@@ -12,7 +12,7 @@ public class Task {
 	private int estimatedHours;
 	private int burnedHours;
 
-	private Worker worker;
+	private String worker;
 	private List<Task> subTasks = new LinkedList<Task>();
 
 	private String description;
@@ -26,7 +26,7 @@ public class Task {
 		this.estimatedHours = estimatedHours;
 	}
 
-	public void setAssignedWorker(Worker worker)
+	public void setAssignedWorker(String worker)
 			throws MustAssignToSubTaskException {
 		if (hasSubTasks()) {
 			throw new MustAssignToSubTaskException(
@@ -35,7 +35,7 @@ public class Task {
 		this.worker = worker;
 	}
 
-	public Worker getAssignedWorker() {
+	public String getAssignedWorker() {
 		return worker;
 	}
 
@@ -88,11 +88,11 @@ public class Task {
 		this.burnedHours = burnedHours;
 	}
 
-	public Worker getWorker() {
+	public String getWorker() {
 		return worker;
 	}
 
-	public void setWorker(Worker worker) {
+	public void setWorker(String worker) {
 		this.worker = worker;
 	}
 

@@ -20,13 +20,11 @@ public class TaskTest {
 
 	@Test
 	public void mustAssignToWorkerWhenTaskHasNoSubTasks() {
-		Worker worker = new Worker();
-
 		// Act
-		task.setAssignedWorker(worker);
+		task.setAssignedWorker("Stefan");
 
 		// Assert
-		Assert.assertEquals(worker, task.getAssignedWorker());
+		Assert.assertEquals("Stefan", task.getAssignedWorker());
 	}
 
 	@Test(expected = MustAssignToSubTaskException.class)
@@ -34,7 +32,7 @@ public class TaskTest {
 		task = Task.createTestInstanceWithSubTasks();
 
 		// Act
-		task.setAssignedWorker(new Worker());
+		task.setAssignedWorker("Stefan");
 	}
 
 	@Test
@@ -58,8 +56,7 @@ public class TaskTest {
 
 	@Test
 	public void mustUnAssignWorkerWhenTaskGetsSubTask() {
-		Worker worker = new Worker();
-		task.setAssignedWorker(worker);
+		task.setAssignedWorker("Stefan");
 
 		Task subTask = new Task("Sub task");
 
@@ -72,8 +69,7 @@ public class TaskTest {
 
 	@Test
 	public void mustAssignWorkerToSubTask() {
-		Worker worker = new Worker();
-		task.setAssignedWorker(worker);
+		task.setAssignedWorker("Stefan");
 
 		Task subTask = new Task("Sub task");
 
@@ -81,7 +77,7 @@ public class TaskTest {
 		task.addSubTask(subTask);
 
 		// Assert
-		Assert.assertTrue(subTask.getAssignedWorker() == worker);
+		Assert.assertTrue("Stefan".equals(subTask.getAssignedWorker()));
 	}
 
 	@Test
