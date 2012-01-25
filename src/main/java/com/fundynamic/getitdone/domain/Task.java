@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.fundynamic.getitdone.domain.exceptions.MustAssignToSubTaskException;
+import org.springframework.util.StringUtils;
 
 public class Task {
 
@@ -121,6 +122,10 @@ public class Task {
 		return estimatedHours == 0;
 	}
 
+	public boolean isInProgress() {
+		return burnedHours > 0 && !isFinished() && isAssignedToWorker();
+	}
+
 	public float getVelocity() {
 		return estimatedHours / burnedHours;
 	}
@@ -132,5 +137,9 @@ public class Task {
 		task.setBurnedHours(taskToCopy.getBurnedHours());
 		task.setId(taskToCopy.getId());
 		return task;
+	}
+
+	public boolean isAssignedToWorker() {
+		return StringUtils.hasText(assignedWorker);
 	}
 }

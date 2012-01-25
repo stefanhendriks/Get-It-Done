@@ -42,9 +42,35 @@ public class TasksController {
 		int totalHoursBurned = getTotalHoursBurned(allTasks);
 		modelMap.addAttribute("totalHoursBurned", totalHoursBurned);
 
+		int totalHoursBurnedFinishedTasks = getTotalHoursBurnedFinishedTasks(allTasks);
+		modelMap.addAttribute("totalHoursBurnedFinishedTasks", totalHoursBurnedFinishedTasks);
+
+		int totalAmountOfTasksFinished = getTotalAmountOfTasksFinished(allTasks);
+		modelMap.addAttribute("tasksFinished", totalAmountOfTasksFinished);
 		return "tasks";
 	}
 
+	private int getTotalAmountOfTasksFinished(List<Task> allTasks) {
+		int tasksFinished = 0;
+		for (Task task : allTasks) {
+			if (task.isFinished()) {
+			 tasksFinished++;
+			}
+		}
+		return tasksFinished;
+	}
+
+	private int getTotalHoursBurnedFinishedTasks(List<Task> allTasks) {
+		int burnedHours = 0;
+		for (Task task : allTasks) {
+			if (task.isFinished()) {
+				burnedHours += task.getBurnedHours();
+			}
+		}
+		return burnedHours;
+	}
+
+	// TODO: use LambdaJ for this stuff!
 	private int getTotalHoursBurned(List<Task> allTasks) {
 		int burnedHours = 0;
 		for (Task task : allTasks) {
