@@ -7,7 +7,9 @@ import com.fundynamic.getitdone.domain.exceptions.MustAssignToSubTaskException;
 
 public class Task {
 
-	private PERTEstimate pertEstimate = new PERTEstimate(1, 5, 3);
+	private int estimatedHours;
+	private int burnedHours;
+
 	private Worker worker;
 	private List<Task> subTasks = new LinkedList<Task>();
 
@@ -17,11 +19,9 @@ public class Task {
 		this.description = description;
 	}
 
-	public Task(String description, PERTEstimate pertEstimate) {
+	public Task(String description, int estimatedHours) {
 		this(description);
-		if (pertEstimate == null)
-			throw new IllegalArgumentException("pertEstimate may not be null");
-		this.pertEstimate = pertEstimate;
+		this.estimatedHours = estimatedHours;
 	}
 
 	public void setAssignedWorker(Worker worker)
@@ -59,37 +59,45 @@ public class Task {
 		return subTasks.size() > 0;
 	}
 
-	public PERTEstimate getPertEstimate() {
+	public int getEstimatedHours() {
 		if (hasSubTasks()) {
 			return calculateEstimatesFromSubTasks();
 		}
-		return pertEstimate;
+		return estimatedHours;
 	}
 
-	private PERTEstimate calculateEstimatesFromSubTasks() {
-		PERTEstimate pertestimate = pertEstimate.createEmpty();
+	private int calculateEstimatesFromSubTasks() {
+		int hours = 0;
 		for (Task task : subTasks) {
-			PERTEstimate taskPERTEstimate = task.getPertEstimate();
-			pertestimate = pertestimate.add(taskPERTEstimate);
+			hours += task.getEstimatedHours();
 		}
-		return pertestimate;
+		return hours;
 	}
 
-	public void setPertEstimate(PERTEstimate pertEstimate) {
-		this.pertEstimate = pertEstimate;
+	public int getBurnedHours() {
+		return burnedHours;
 	}
 
+	public void setBurnedHours(int burnedHours) {
+		this.burnedHours = burnedHours;
+	}
+
+	public Worker getWorker() {
+		return worker;
+	}
+
+	public void setWorker(Worker worker) {
+		this.worker = worker;
+	}
+
+	@Override
 	public String toString() {
-		final String TAB = "    ";
-
-		String retValue = "";
-
-		retValue = "Task ( pertEstimate = "
-				+ this.pertEstimate + TAB + "worker = " + this.worker + TAB
-				+ "subTasks = " + this.subTasks + TAB + "description = "
-				+ this.description + TAB + " )";
-
-		return retValue;
+		return "Task{" +
+				  "estimatedHours=" + estimatedHours +
+				  ", burnedHours=" + burnedHours +
+				  ", worker=" + worker +
+				  ", subTasks=" + subTasks +
+				  ", description='" + description + '\'' +
+				  '}';
 	}
-
 }

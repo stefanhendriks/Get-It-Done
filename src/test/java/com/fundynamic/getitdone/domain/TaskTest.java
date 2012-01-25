@@ -86,19 +86,15 @@ public class TaskTest {
 
 	@Test
 	public void mustReturnTotalEstimatedForSubTasks() {
-		task.addSubTask(new Task("Some task", new PERTEstimate(5, 10, 7)));
-		task.addSubTask(new Task("Some other task", new PERTEstimate(7, 20, 12)));
-		task.addSubTask(new Task("Some other other task", new PERTEstimate(1, 4, 2)));
+		task.addSubTask(new Task("Some task", 5));
+		task.addSubTask(new Task("Some other task", 10));
+		task.addSubTask(new Task("Some other other task", 3));
 		
 		// Act
-		PERTEstimate PERTEstimate = task.getPertEstimate();
-		
-		// Assert
-		Assert.assertEquals(13, PERTEstimate.getOptimistic());
-		Assert.assertEquals(34, PERTEstimate.getPessimistic());
-		Assert.assertEquals(21, PERTEstimate.getMostLikely());
+		int estimatedHours = task.getEstimatedHours();
 
-		System.out.println(task);
+		// Assert
+		Assert.assertEquals(18, estimatedHours);
 	}
 	
 }
