@@ -7,3 +7,4 @@
 *.project
 *.tomcatplugin
 /src/main/webapp/.#webclasspath
+/.idea

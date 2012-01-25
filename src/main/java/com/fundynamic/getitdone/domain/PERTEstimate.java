@@ -1,12 +1,12 @@
 package com.fundynamic.getitdone.domain;
 
-public class Estimate {
+public class PERTEstimate {
 
 	protected int optimistic = 0;
 	protected int pessimistic = 0;
 	protected int mostLikely = 0;
 
-	public Estimate(int optimistic, int pessimistic, int mostLikely) {
+	public PERTEstimate(int optimistic, int pessimistic, int mostLikely) {
 		if (optimistic > pessimistic) {
 			throw new IllegalArgumentException("Pessimistic value ["
 					+ pessimistic
@@ -18,35 +18,35 @@ public class Estimate {
 		setMostLikely(mostLikely);
 	}
 
-	public Estimate() {
+	public PERTEstimate() {
 		setOptimistic(0);
 		setPessimistic(0);
 		setMostLikely(0);
 	}
 
-	public static Estimate createEmpty() {
-		Estimate estimate = new Estimate();
-		estimate.pessimistic = 0;
-		estimate.optimistic = 0;
-		estimate.mostLikely = 0;
-		return estimate;
+	public static PERTEstimate createEmpty() {
+		PERTEstimate PERTEstimate = new PERTEstimate();
+		PERTEstimate.pessimistic = 0;
+		PERTEstimate.optimistic = 0;
+		PERTEstimate.mostLikely = 0;
+		return PERTEstimate;
 	}
 
-	public static Estimate createWithAverageMostLikely(int optimistic,
+	public static PERTEstimate createWithAverageMostLikely(int optimistic,
 			int pessimistic) {
-		Estimate estimate = new Estimate();
-		estimate.setPessimistic(pessimistic);
-		estimate.setOptimistic(optimistic);
-		estimate.setMostLikely((pessimistic + optimistic) / 2);
-		return estimate;
+		PERTEstimate PERTEstimate = new PERTEstimate();
+		PERTEstimate.setPessimistic(pessimistic);
+		PERTEstimate.setOptimistic(optimistic);
+		PERTEstimate.setMostLikely((pessimistic + optimistic) / 2);
+		return PERTEstimate;
 	}
 
-	public Estimate add(Estimate anotherEstimate) {
-		int newOptimistic = this.optimistic + anotherEstimate.getOptimistic();
+	public PERTEstimate add(PERTEstimate anotherPERTEstimate) {
+		int newOptimistic = this.optimistic + anotherPERTEstimate.getOptimistic();
 		int newPessimistic = this.pessimistic
-				+ anotherEstimate.getPessimistic();
-		int newMostLikely = this.mostLikely + anotherEstimate.getMostLikely();
-		return new Estimate(newOptimistic, newPessimistic, newMostLikely);
+				+ anotherPERTEstimate.getPessimistic();
+		int newMostLikely = this.mostLikely + anotherPERTEstimate.getMostLikely();
+		return new PERTEstimate(newOptimistic, newPessimistic, newMostLikely);
 	}
 
 	public int getPERTEstimate() {
@@ -97,7 +97,7 @@ public class Estimate {
 
 		String retValue = "";
 
-		retValue = "Estimate ( optimistic = "
+		retValue = "PERTEstimate ( optimistic = "
 				+ this.optimistic + TAB + "pessimistic = " + this.pessimistic
 				+ TAB + "mostLikely = " + this.mostLikely + TAB + " )";
 

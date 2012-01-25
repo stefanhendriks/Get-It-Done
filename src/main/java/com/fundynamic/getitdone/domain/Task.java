@@ -7,7 +7,7 @@ import com.fundynamic.getitdone.domain.exceptions.MustAssignToSubTaskException;
 
 public class Task {
 
-	private Estimate estimate = new Estimate(1, 5, 3);
+	private PERTEstimate pertEstimate = new PERTEstimate(1, 5, 3);
 	private Worker worker;
 	private List<Task> subTasks = new LinkedList<Task>();
 
@@ -17,11 +17,11 @@ public class Task {
 		this.description = description;
 	}
 
-	public Task(String description, Estimate estimate) {
+	public Task(String description, PERTEstimate pertEstimate) {
 		this(description);
-		if (estimate == null)
-			throw new IllegalArgumentException("Estimate may not be null");
-		this.estimate = estimate;
+		if (pertEstimate == null)
+			throw new IllegalArgumentException("pertEstimate may not be null");
+		this.pertEstimate = pertEstimate;
 	}
 
 	public void setAssignedWorker(Worker worker)
@@ -59,24 +59,24 @@ public class Task {
 		return subTasks.size() > 0;
 	}
 
-	public Estimate getEstimate() {
+	public PERTEstimate getPertEstimate() {
 		if (hasSubTasks()) {
 			return calculateEstimatesFromSubTasks();
 		}
-		return estimate;
+		return pertEstimate;
 	}
 
-	private Estimate calculateEstimatesFromSubTasks() {
-		Estimate estimate = Estimate.createEmpty();
+	private PERTEstimate calculateEstimatesFromSubTasks() {
+		PERTEstimate pertestimate = pertEstimate.createEmpty();
 		for (Task task : subTasks) {
-			Estimate taskEstimate = task.getEstimate();
-			estimate = estimate.add(taskEstimate);
+			PERTEstimate taskPERTEstimate = task.getPertEstimate();
+			pertestimate = pertestimate.add(taskPERTEstimate);
 		}
-		return estimate;
+		return pertestimate;
 	}
 
-	public void setEstimate(Estimate estimate) {
-		this.estimate = estimate;
+	public void setPertEstimate(PERTEstimate pertEstimate) {
+		this.pertEstimate = pertEstimate;
 	}
 
 	public String toString() {
@@ -84,8 +84,8 @@ public class Task {
 
 		String retValue = "";
 
-		retValue = "Task ( estimate = "
-				+ this.estimate + TAB + "worker = " + this.worker + TAB
+		retValue = "Task ( pertEstimate = "
+				+ this.pertEstimate + TAB + "worker = " + this.worker + TAB
 				+ "subTasks = " + this.subTasks + TAB + "description = "
 				+ this.description + TAB + " )";
 

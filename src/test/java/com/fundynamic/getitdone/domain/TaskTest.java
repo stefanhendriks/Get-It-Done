@@ -7,8 +7,6 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fundynamic.getitdone.domain.Task;
-import com.fundynamic.getitdone.domain.Worker;
 import com.fundynamic.getitdone.domain.exceptions.MustAssignToSubTaskException;
 
 public class TaskTest {
@@ -88,17 +86,17 @@ public class TaskTest {
 
 	@Test
 	public void mustReturnTotalEstimatedForSubTasks() {
-		task.addSubTask(new Task("Some task", new Estimate(5, 10, 7)));
-		task.addSubTask(new Task("Some other task", new Estimate(7, 20, 12)));
-		task.addSubTask(new Task("Some other other task", new Estimate(1, 4, 2)));
+		task.addSubTask(new Task("Some task", new PERTEstimate(5, 10, 7)));
+		task.addSubTask(new Task("Some other task", new PERTEstimate(7, 20, 12)));
+		task.addSubTask(new Task("Some other other task", new PERTEstimate(1, 4, 2)));
 		
 		// Act
-		Estimate estimate = task.getEstimate();
+		PERTEstimate PERTEstimate = task.getPertEstimate();
 		
 		// Assert
-		Assert.assertEquals(13, estimate.getOptimistic());
-		Assert.assertEquals(34, estimate.getPessimistic());
-		Assert.assertEquals(21, estimate.getMostLikely());
+		Assert.assertEquals(13, PERTEstimate.getOptimistic());
+		Assert.assertEquals(34, PERTEstimate.getPessimistic());
+		Assert.assertEquals(21, PERTEstimate.getMostLikely());
 
 		System.out.println(task);
 	}
