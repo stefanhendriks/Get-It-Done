@@ -4,6 +4,8 @@ import com.fundynamic.getitdone.domain.Task;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 @Component
 public class MemoryTaskRepository implements TaskRepository{
@@ -23,6 +25,10 @@ public class MemoryTaskRepository implements TaskRepository{
 		}
 		tasksHashMap.put(id, task);
 		return task;
+	}
+
+	public List<Task> getAllTasks() {
+		return new LinkedList<Task>(tasksHashMap.values());
 	}
 
 	protected long getNewId() {
