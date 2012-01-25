@@ -98,5 +98,10 @@ public class TaskTest {
 		Task task = new Task("someTask", 10);
 		org.junit.Assert.assertEquals(10, task.getEstimatedHours());
 	}
-	
+
+	@Test
+	public void mustReturnFinishedWhenEstimatedHoursIsZero() {
+		task.setEstimatedHours(0);
+		Assert.assertTrue(task.isFinished());
+	}
 }

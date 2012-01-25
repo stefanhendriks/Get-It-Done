@@ -9,6 +9,13 @@
 
 <p>Manage tasks</p>
 
+<h2>Summary</h2>
+Total amount of hours estimated until completion of all tasks: ${totalHoursEstimated}<br/>
+Total amount of hours burned (finished and unfinished tasks): ${totalHoursBurned}<br/>
+<br/>
+Total amount of tasks finished : ${tasksFinished}<br/>
+Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTasks}<br/>
+
 <table cellspacing="0">
 		<tr>
 			<th></th>

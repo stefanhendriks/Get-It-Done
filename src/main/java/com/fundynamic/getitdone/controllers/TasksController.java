@@ -34,7 +34,31 @@ public class TasksController {
 		if (size > 0) {
 			modelMap.addAttribute("lastTaskId", allTasks.get((size-1)).getId());
 		}
+
+		modelMap.addAttribute("taskAmount", size);
+		int totalHoursEstimated = getTotalHoursEstimated(allTasks);
+		modelMap.addAttribute("totalHoursEstimated", totalHoursEstimated);
+
+		int totalHoursBurned = getTotalHoursBurned(allTasks);
+		modelMap.addAttribute("totalHoursBurned", totalHoursBurned);
+
 		return "tasks";
+	}
+
+	private int getTotalHoursBurned(List<Task> allTasks) {
+		int burnedHours = 0;
+		for (Task task : allTasks) {
+			burnedHours += task.getBurnedHours();
+		}
+		return burnedHours;
+	}
+
+	private int getTotalHoursEstimated(List<Task> allTasks) {
+		int hoursEstimated = 0;
+		for (Task task : allTasks) {
+			hoursEstimated += task.getEstimatedHours();
+		}
+		return hoursEstimated;
 	}
 
 

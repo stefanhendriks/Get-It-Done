@@ -12,7 +12,7 @@ public class Task {
 	private int estimatedHours;
 	private int burnedHours;
 
-	private String worker;
+	private String assignedWorker;
 	private List<Task> subTasks = new LinkedList<Task>();
 
 	private String description;
@@ -30,20 +30,20 @@ public class Task {
 			throws MustAssignToSubTaskException {
 		if (hasSubTasks()) {
 			throw new MustAssignToSubTaskException(
-					"Cannot assign a worker to a task with sub tasks. Assign to the subtasks instead.");
+					"Cannot assign a assignedWorker to a task with sub tasks. Assign to the subtasks instead.");
 		}
-		this.worker = worker;
+		this.assignedWorker = worker;
 	}
 
 	public String getAssignedWorker() {
-		return worker;
+		return assignedWorker;
 	}
 
 	public void addSubTask(Task subTask) {
 		subTasks.add(subTask);
-		if (worker != null) {
-			subTask.setAssignedWorker(worker);
-			worker = null;
+		if (assignedWorker != null) {
+			subTask.setAssignedWorker(assignedWorker);
+			assignedWorker = null;
 		}
 	}
 
@@ -88,14 +88,6 @@ public class Task {
 		this.burnedHours = burnedHours;
 	}
 
-	public String getWorker() {
-		return worker;
-	}
-
-	public void setWorker(String worker) {
-		this.worker = worker;
-	}
-
 	public long getId() {
 		return id;
 	}
@@ -112,14 +104,33 @@ public class Task {
 		return description;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Task{" +
 				  "estimatedHours=" + estimatedHours +
 				  ", burnedHours=" + burnedHours +
-				  ", worker=" + worker +
+				  ", assignedWorker=" + assignedWorker +
 				  ", subTasks=" + subTasks +
 				  ", description='" + description + '\'' +
 				  '}';
+	}
+
+	public boolean isFinished() {
+		return estimatedHours == 0;
+	}
+
+	public float getVelocity() {
+		return estimatedHours / burnedHours;
+	}
+
+	public static Task copyFrom(Task taskToCopy) {
+		Task task = new Task(taskToCopy.getDescription());
+		task.setEstimatedHours(taskToCopy.getEstimatedHours());
+		task.setAssignedWorker(taskToCopy.getAssignedWorker());
+		task.setBurnedHours(taskToCopy.getBurnedHours());
+		task.setId(taskToCopy.getId());
+		return task;
 	}
 }
