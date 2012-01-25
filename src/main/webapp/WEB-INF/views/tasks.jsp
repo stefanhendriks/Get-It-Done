@@ -21,12 +21,13 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 		<th></th>
 		<th>Description</th>
 		<th>Assignee</th>
+		<th>Initial ETC</th>
 		<th>ETC</th>
 		<th>Burned</th>
 		<th></th>
 	</tr>
 	<tr>
-		<td colspan="6" style="background-color: green;">Finished tasks</td>
+		<td colspan="7" style="background-color: green;">Finished tasks</td>
 	</tr>
 	<c:forEach items="${tasks}" var="task">
 		<c:if test="${task.finished}">
@@ -35,7 +36,8 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 					<td align="center">${task.id}</td>
 					<td><input type="text" value="${task.description}" name="description" size="80"></td>
 					<td><input type="text" value="${task.assignedWorker}" name="assignedWorker" size="25"></td>
-					<td><input type="text" value="${task.estimatedHours}" name="estimatedHours" size="5"></td>
+					<td><input type="text" value="${task.initialEstimatedHours}" name="initialEstimatedHours" size="10"></td>
+					<td><input type="text" value="${task.estimatedHours}" name="estimatedHours" size="10"></td>
 					<td><input type="text" value="${task.burnedHours}" name="burnedHours" size="5"></td>
 					<td align="right"><input type="submit" name="action" value="Update"></td>
 				</tr>
@@ -43,10 +45,10 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 		</c:if>
 	</c:forEach>
 	<tr style="background-color: black;">
-		<td colspan="6"/>
+		<td colspan="7"/>
 	</tr>
 	<tr>
-		<td colspan="6" style="background-color: orange;">Tasks in progress</td>
+		<td colspan="7" style="background-color: orange;">Tasks in progress</td>
 	</tr>
 	<c:forEach items="${tasks}" var="task">
 		<c:if test="${not task.finished and task.inProgress}">
@@ -55,7 +57,8 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 					<td align="center">${task.id}</td>
 					<td><input type="text" value="${task.description}" name="description" size="80"></td>
 					<td><input type="text" value="${task.assignedWorker}" name="assignedWorker" size="25"></td>
-					<td><input type="text" value="${task.estimatedHours}" name="estimatedHours" size="5"></td>
+					<td><input type="text" value="${task.estimatedHours}" name="estimatedHours" size="10"></td>
+					<td><input type="text" value="${task.initialEstimatedHours}" name="initialEstimatedHours" size="10" readonly></td>
 					<td><input type="text" value="${task.burnedHours}" name="burnedHours" size="5"></td>
 					<td align="right"><input type="submit" name="action" value="Update"></td>
 				</tr>
@@ -73,10 +76,10 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 		</c:if>
 	</c:forEach>
 	<tr style="background-color: black;">
-		<td colspan="6"/>
+		<td colspan="7"/>
 	</tr>
 	<tr>
-		<td colspan="6" style="background-color: red;">Tasks open</td>
+		<td colspan="7" style="background-color: red;">Tasks open</td>
 	</tr>
 	<c:forEach items="${tasks}" var="task">
 		<c:if test="${not task.finished and not task.inProgress}">
@@ -85,7 +88,8 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 					<td align="center">${task.id}</td>
 					<td><input type="text" value="${task.description}" name="description" size="80"></td>
 					<td><input type="text" value="${task.assignedWorker}" name="assignedWorker" size="25"></td>
-					<td><input type="text" value="${task.estimatedHours}" name="estimatedHours" size="5"></td>
+					<td><input type="text" value="${task.estimatedHours}" name="estimatedHours" size="10"></td>
+					<td><input type="text" value="${task.initialEstimatedHours}" name="initialEstimatedHours" size="10"></td>					
 					<td><input type="text" value="${task.burnedHours}" name="burnedHours" size="5"></td>
 					<td align="right"><input type="submit" name="action" value="Update"></td>
 				</tr>
@@ -103,14 +107,15 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 		</c:if>
 	</c:forEach>
 	<tr style="background-color: black;">
-		<td colspan="6" />
+		<td colspan="7" />
 	</tr>
 	<form action="${pageContext.request.contextPath}/tasks/save.htm" method="POST">
 	<tr>
 		<td>New Task</td>
 		<td><input type="text" name="description" size="80"></td>
 		<td><input type="text" name="assignedWorker" size="25"></td>
-		<td><input type="text" name="estimatedHours" size="5"></td>
+		<td><input type="text" name="estimatedHours" size="10"></td>
+		<td><input type="text" name="initialEstimatedHours" size="10"></td>
 		<td><input type="text" name="burnedHours" size="5"></td>
 		<td align="right"><input type="submit" name="action" value="Save"></td>
 	</tr>

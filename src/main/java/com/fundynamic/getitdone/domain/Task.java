@@ -10,6 +10,7 @@ public class Task {
 
 	private long id = -1L;
 
+	private int initialEstimatedHours;
 	private int estimatedHours;
 	private int burnedHours;
 
@@ -119,7 +120,7 @@ public class Task {
 	}
 
 	public boolean isFinished() {
-		return estimatedHours == 0;
+		return estimatedHours == 0 && initialEstimatedHours > 0 && burnedHours > 0;
 	}
 
 	public boolean isInProgress() {
@@ -142,4 +143,13 @@ public class Task {
 	public boolean isAssignedToWorker() {
 		return StringUtils.hasText(assignedWorker);
 	}
+
+	public int getInitialEstimatedHours() {
+		return initialEstimatedHours;
+	}
+
+	public void setInitialEstimatedHours(int initialEstimatedHours) {
+		this.initialEstimatedHours = initialEstimatedHours;
+	}
+	
 }

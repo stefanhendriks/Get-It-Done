@@ -100,8 +100,11 @@ public class TaskTest {
 	}
 
 	@Test
-	public void mustReturnFinishedWhenEstimatedHoursIsZero() {
+	public void mustReturnFinishedWhenEstimatedHoursIsZeroAndInitialEstimatedIsHigherAndBurnedIsHigher() {
 		task.setEstimatedHours(0);
+		task.setBurnedHours(1);
+		task.setInitialEstimatedHours(1);
+	
 		Assert.assertTrue(task.isFinished());
 	}
 }

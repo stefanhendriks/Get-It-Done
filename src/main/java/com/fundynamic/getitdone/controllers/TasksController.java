@@ -90,9 +90,12 @@ public class TasksController {
 
 	@RequestMapping(value = "/save")
 	public String saveNewTask(ModelMap modelMap, HttpServletRequest request) throws ServletException, IOException {
+		
 		Task newTask = new Task(request.getParameter("description"));
+		newTask.setInitialEstimatedHours(getHoursForValue(request.getParameter("initialEstimatedHours")));
 		newTask.setEstimatedHours(getHoursForValue(request.getParameter("estimatedHours")));
 		newTask.setBurnedHours(getHoursForValue(request.getParameter("burnedHours")));
+		
 		String assignedWorker = request.getParameter("assignedWorker");
 		newTask.setAssignedWorker(assignedWorker);
 		taskRepository.upsertTask(newTask);
