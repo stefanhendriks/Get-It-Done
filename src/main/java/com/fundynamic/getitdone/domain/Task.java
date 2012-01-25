@@ -7,13 +7,15 @@ import com.fundynamic.getitdone.domain.exceptions.MustAssignToSubTaskException;
 
 public class Task {
 
+	private long id = -1L;
+
 	private int estimatedHours;
 	private int burnedHours;
 
 	private Worker worker;
 	private List<Task> subTasks = new LinkedList<Task>();
 
-	private final String description;
+	private String description;
 
 	public Task(String description) {
 		this.description = description;
@@ -74,6 +76,10 @@ public class Task {
 		return hours;
 	}
 
+	public void setEstimatedHours(int estimatedHours) {
+		this.estimatedHours = estimatedHours;
+	}
+
 	public int getBurnedHours() {
 		return burnedHours;
 	}
@@ -88,6 +94,22 @@ public class Task {
 
 	public void setWorker(Worker worker) {
 		this.worker = worker;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDescription() {
+		return description;
 	}
 
 	@Override
