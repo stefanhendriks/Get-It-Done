@@ -15,9 +15,9 @@ public class Task {
 	private int burnedHours;
 
 	private String assignedWorker;
-	private List<Task> subTasks = new LinkedList<Task>();
 
 	private String description;
+	private List<String> tags = new LinkedList<String>();
 
 	public Task(String description) {
 		this.description = description;
@@ -30,10 +30,6 @@ public class Task {
 
 	public void setAssignedWorker(String worker)
 			throws MustAssignToSubTaskException {
-		if (hasSubTasks()) {
-			throw new MustAssignToSubTaskException(
-					"Cannot assign a assignedWorker to a task with sub tasks. Assign to the subtasks instead.");
-		}
 		this.assignedWorker = worker;
 	}
 
@@ -41,41 +37,13 @@ public class Task {
 		return assignedWorker;
 	}
 
-	public void addSubTask(Task subTask) {
-		subTasks.add(subTask);
-		if (assignedWorker != null) {
-			subTask.setAssignedWorker(assignedWorker);
-			assignedWorker = null;
-		}
-	}
-
-	public List<Task> getSubTasks() {
-		return subTasks;
-	}
-
-	public static Task createTestInstanceWithSubTasks() {
+	public static Task createTestInstance() {
 		Task task = new Task("Test task");
-		task.addSubTask(new Task("Test sub task"));
 		return task;
 	}
 
-	public boolean hasSubTasks() {
-		return subTasks.size() > 0;
-	}
-
 	public int getEstimatedHours() {
-		if (hasSubTasks()) {
-			return calculateEstimatesFromSubTasks();
-		}
 		return estimatedHours;
-	}
-
-	private int calculateEstimatesFromSubTasks() {
-		int hours = 0;
-		for (Task task : subTasks) {
-			hours += task.getEstimatedHours();
-		}
-		return hours;
 	}
 
 	public void setEstimatedHours(int estimatedHours) {
@@ -104,19 +72,6 @@ public class Task {
 
 	public String getDescription() {
 		return description;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "Task{" +
-				  "estimatedHours=" + estimatedHours +
-				  ", burnedHours=" + burnedHours +
-				  ", assignedWorker=" + assignedWorker +
-				  ", subTasks=" + subTasks +
-				  ", description='" + description + '\'' +
-				  '}';
 	}
 
 	public boolean isFinished() {
@@ -151,5 +106,27 @@ public class Task {
 	public void setInitialEstimatedHours(int initialEstimatedHours) {
 		this.initialEstimatedHours = initialEstimatedHours;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Task{" +
+				  "id=" + id +
+				  ", initialEstimatedHours=" + initialEstimatedHours +
+				  ", estimatedHours=" + estimatedHours +
+				  ", burnedHours=" + burnedHours +
+				  ", assignedWorker='" + assignedWorker + '\'' +
+				  ", description='" + description + '\'' +
+				  '}';
+	}
+
+	public void addTag(String tagname) {
+		if (!StringUtils.hasText(tagname)) return;
+		tagname = StringUtils.trimWhitespace(tagname);
+		if (tags.contains(tagname)) return;
+		tags.add(tagname);
+	}
+
+	public List<String> getTags() {
+		return tags;
+	}
 }
