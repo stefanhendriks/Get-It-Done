@@ -36,7 +36,7 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 					<td align="center">${task.id}</td>
 					<td><input type="text" value="${task.description}" name="description" size="80"></td>
 					<td><input type="text" value="${task.assignedWorker}" name="assignedWorker" size="25"></td>
-					<td><input type="text" value="${task.initialEstimatedHours}" name="initialEstimatedHours" size="10"></td>
+					<td><input type="text" value="${task.initialEstimatedHours}" name="initialEstimatedHours" size="10" readonly></td>
 					<td><input type="text" value="${task.estimatedHours}" name="estimatedHours" size="10"></td>
 					<td><input type="text" value="${task.burnedHours}" name="burnedHours" size="5"></td>
 					<td align="right"><input type="submit" name="action" value="Update"></td>
@@ -57,8 +57,8 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 					<td align="center">${task.id}</td>
 					<td><input type="text" value="${task.description}" name="description" size="80"></td>
 					<td><input type="text" value="${task.assignedWorker}" name="assignedWorker" size="25"></td>
-					<td><input type="text" value="${task.estimatedHours}" name="estimatedHours" size="10"></td>
 					<td><input type="text" value="${task.initialEstimatedHours}" name="initialEstimatedHours" size="10" readonly></td>
+					<td><input type="text" value="${task.estimatedHours}" name="estimatedHours" size="10"></td>
 					<td><input type="text" value="${task.burnedHours}" name="burnedHours" size="5"></td>
 					<td align="right"><input type="submit" name="action" value="Update"></td>
 				</tr>
@@ -114,8 +114,8 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 		<td>New Task</td>
 		<td><input type="text" name="description" size="80"></td>
 		<td><input type="text" name="assignedWorker" size="25"></td>
-		<td><input type="text" name="estimatedHours" size="10"></td>
 		<td><input type="text" name="initialEstimatedHours" size="10"></td>
+		<td><input type="text" name="estimatedHours" size="10"></td>
 		<td><input type="text" name="burnedHours" size="5"></td>
 		<td align="right"><input type="submit" name="action" value="Save"></td>
 	</tr>
