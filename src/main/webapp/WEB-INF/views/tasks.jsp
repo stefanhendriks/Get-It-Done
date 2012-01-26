@@ -63,16 +63,6 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 					<td align="right"><input type="submit" name="action" value="Update"></td>
 				</tr>
 			</form>
-			<form action="${pageContext.request.contextPath}/tasks/save.htm" method="POST">
-				<tr id="subtaskpanel_${task.id}" style="display: none">
-					<td></td>
-					<td><input type="text" name="description" size="80"></td>
-					<td><input type="text" name="assignedWorker" size="25"></td>
-					<td><input type="text" name="estimatedHours" size="5"></td>
-					<td><input type="text" name="burnedHours" size="5"></td>
-					<td align="right"><input type="submit" name="action" value="Save"></td>
-				</tr>
-			</form>
 		</c:if>
 	</c:forEach>
 	<tr style="background-color: black;">
@@ -92,16 +82,6 @@ Total amount of hours burned for finished tasks : ${totalHoursBurnedFinishedTask
 					<td><input type="text" value="${task.initialEstimatedHours}" name="initialEstimatedHours" size="10"></td>					
 					<td><input type="text" value="${task.burnedHours}" name="burnedHours" size="5"></td>
 					<td align="right"><input type="submit" name="action" value="Update"></td>
-				</tr>
-			</form>
-			<form action="/tasks/save.htm" method="POST">
-				<tr id="subtaskpanel_${task.id}" style="display: none">
-					<td></td>
-					<td><input type="text" name="description" size="80"></td>
-					<td><input type="text" name="assignedWorker" size="25"></td>
-					<td><input type="text" name="estimatedHours" size="5"></td>
-					<td><input type="text" name="burnedHours" size="5"></td>
-					<td align="right"><input type="submit" name="action" value="Save"></td>
 				</tr>
 			</form>
 		</c:if>
